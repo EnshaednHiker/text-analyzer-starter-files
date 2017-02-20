@@ -5,7 +5,6 @@ function getWords(rawString) {
 function analyzeText(){
     var wordBlock = "";
     var wordArray = [];
-    $('textarea#js-user-text').click().empty();
     
     $("#text-area-box").submit(function(){
         event.preventDefault();
@@ -14,27 +13,31 @@ function analyzeText(){
         wordArray = getWords(wordBlock);
         $(".text-report").removeClass("hidden");
         $("#js-word-count").append(countWords(wordArray));
-
-        $("#js-average-word-length").append(averageWordLength(wordArray));
-
-         
+        $("#js-unique-word-count").append(countUniqueWords(wordArray));
+        $("#js-average-word-length").append(averageWordLength(wordArray));         
     });
 
 }
 
 function countWords(array){
-return array.length;
+    return array.length;
 }
 
 function countUniqueWords(array){
-    array
+    var arrayUnique = [];
+    array.forEach(function(word, element){
+        if (arrayUnique.includes(word)===false){
+            arrayUnique.push(word);
+        }
+    });
+    return arrayUnique.length;
 }
 
 function averageWordLength(array){
     var sumLength = 0;
      
-    array.forEach(function(element){
-       sumLength += element.length;
+    array.forEach(function(word){
+       sumLength += word.length;
     });
     return sumLength/array.length;
 }

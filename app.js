@@ -15,6 +15,7 @@ function analyzeText() {
         $("#js-word-count").append(countWords(wordArray));
         $("#js-unique-word-count").append(countUniqueWords(wordArray));
         $("#js-average-word-length").append(averageWordLength(wordArray));
+        $("#js-average-word-length").append(" characters");
     });
 
 }
@@ -39,7 +40,7 @@ function averageWordLength(array) {
     array.forEach(function (word) {
         sumLength += word.length;
     });
-    return sumLength / array.length;
+       return (Math.round(sumLength / array.length * 100))/100;
 }
 
 $(analyzeText)
